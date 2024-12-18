@@ -1,0 +1,115 @@
+<div class="container">
+<form [formGroup]="reportForm" (ngSubmit)="generateReport()">
+    @for (field of dynamicFormFields; track $index) {
+    <div class="form-group">
+        <label>{{ field.name }}</label>
+
+        <!-- Radio buttons -->
+        @if (field.type === 'radio') {
+        <div>
+            @for (option of field.options; track $index) {
+            <div>
+                <input type="radio" [formControlName]="field.controlName" [value]="option.value"> {{ option.label }}
+            </div>
+            }
+        </div>
+        }
+
+        <!-- Text and Date inputs -->
+        @if (field.type === 'text' || field.type === 'date') {
+        <!-- @if (field.type === 'text') { -->
+        <div>
+            <input [type]="field.type" [formControlName]="field.controlName" [placeholder]="field.placeholder">
+        </div>
+        }
+
+        <!-- File upload input -->
+        @if (field.type === 'file') {
+        <div>
+            <input type="file" [formControlName]="field.controlName" accept=".csv, .xlsx, .txt"
+                (change)="onFileSelected($event)" webkitdirectory>
+        </div>
+
+        <!-- Upload File Button - Disabled initially and only enabled when a valid file is uploaded -->
+        <div>
+            <button type="button" (click)="uploadFile()" [disabled]="!isFileValid">Upload File</button>
+        </div>
+        }
+
+        <!-- Select input -->
+        @if (field.type === 'select') {
+        <div>
+            <select [formControlName]="field.controlName">
+                <option value="">Choose an option</option>
+                @for (option of field.options; track $index) {
+                <option [value]="option.value">
+                    {{ option.label }}
+                </option>
+                }
+            </select>
+        </div>
+        }
+
+        @if (field.type === 'multi-select') {
+        <!-- NgSelect for multi-select dropdown with search -->
+        <div>
+            <ng-select [items]="field.options" bindLabel="label" bindValue="value" [multiple]="true" [searchable]="true"
+                [formControlName]="field.controlName" placeholder="Select">
+            </ng-select>
+        </div>
+        }
+    </div>
+    }
+    <!-- Generate Report Button -->
+    <div>
+        <button type="submit">Generate Report</button>
+    </div>
+</form>
+</div>
+
+<!-- Report Table -->
+@if(stockreports != null && stockreports.length > 0){
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                @if(reportForm.get("columns")?.value != ''){
+                    @for(column of reportForm.get("columns")?.value; track $index){
+                    <th>{{ column }}</th>
+                    }
+                }
+                @else{
+                    @for(column of columns; track $index){
+                    <th>{{ column }}</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if(reportForm.get("columns")?.value != ''){
+                @for(report of stockreports; track $index){
+                <tr>
+                    @for(column of reportForm.get("columns")?.value; track $index){
+                    <td>{{ report[column.toLowerCase()] }}</td>
+                    }
+                </tr>
+                }
+            }
+            @else {
+            @for(report of stockreports; track $index){
+            <tr>
+                @for(column of columns; track $index){
+                <td>{{ report[column] }}</td>
+                }
+            </tr>
+            }
+            }
+        </tbody>
+    </table>
+</div>
+}
+@else{
+<ng-template #noData>
+    <p>No reports available.</p>
+</ng-template>
+}

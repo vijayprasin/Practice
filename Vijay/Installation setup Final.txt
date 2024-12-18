@@ -1,0 +1,48 @@
+Changes needed to run the code.
+
+1. Download The input files for USA/Canada and extract it to some location.
+2. Download the DataLoader Python Scripts and extract it to some location.
+3. Install Python 3.12 or above.
+4. Go to cmd and open python location C:\Users\Admin\AppData\Local\Programs\Python\Python313
+5. run command pip install pyodbc and pip install pandas ( if having trouble in running pip then you might need to enable environment variable)
+     //Follow these steps if pip not recognized.
+     a) Open the System Properties window by pressing Windows key + R, typing sysdm.cpl, and pressing Enter.
+     b) Go to the Advanced tab and click on Environment Variables.
+     c) In the System variables section, find the Path variable and click Edit.
+     d) Add the path to your Python Scripts folder (e.g., C:\Python39\Scripts)
+
+6. Now Open the Loader.py file from Dataloader folder and at line no. 6 and 8 replace the input path with your file(USA/CANADA). Note : Make sure to change backward slash to forward before pasting. 
+  eg:   #dir_path_usa = 'C:/Users/mukil/OneDrive/Documents/Projects/DataEngineering/Input/USA/'
+	dir_path_usa = 'C:/Users/Admin/Downloads/USA/'
+	#dir_path_can = 'C:/Users/mukil/OneDrive/Documents/Projects/DataEngineering/Input/Canada/'
+	dir_path_can = 'C:/Users/Admin/Downloads/Canada/'
+	
+	* In cmd --> open dataloader folder --> Check python version --> run commands python SqlHelper.py  and python Loader.py (Data will load in DB)
+	
+7. Open SqlHelper File and Replace the server at line 6 with your ssms server. Eg "Server=DESKTOP-xyzs;"
+8. Now open the Visual studio solution and go to appsetting.json and update the connection string with your local server.
+9. Open MYAppDbContext.cs file under Model Folder and Update the Server Name at Line no. 22 
+10. Open StockReportRepository.cs file and change Line no. 41 with your python path. eg :  string pythonInterpreter = @"C:\Users\Admin\AppData\Local\Programs\Python\Python313\python.exe";
+11. In the same file change line no. 47 with your loader.py path eg : string scriptPath = @"C:\Users\Admin\Downloads\DataLoader\DataLoader\Loader.py";
+12. There is small bug in GetReportAsync Method , At line no. 124 and 129, remove the hours and second timestamps from the date. It Should be like this only. conditions.Add($"DATE >= '{fromDate.Value.ToString("yyyy-MM-dd")}'");
+13. Run the front end code with ng serve and run the api code.
+
+
+Ui set up
+
+Steps to run the angular UI code:
+
+1.Install NodeJs Latest version
+2.Install Angular Js latest version
+3.Set up environment variable (eg : C:\Users\deepu\AppData\Roaming\npm)
+4.install python and check python --version in cmd 
+5.pip --version
+6.Open angular application in visual code. open Terminal. --> Cmd command to check whether angular installed: ng version
+7.Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+8. run npm install openssl
+9. run cd stockreport.client 
+10. ng build
+11. ng serve -->(click on the given link )
+ 
+
+

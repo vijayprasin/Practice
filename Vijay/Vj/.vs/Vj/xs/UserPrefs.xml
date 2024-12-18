@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{01A1A7F6-3220-47E4-A380-E104282B3770}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Vj PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Vj/WeatherForecast.cs">
+    <Files>
+      <File FileName="Vj/Program.cs" Line="25" Column="1" />
+      <File FileName="Vj/appsettings.json" Line="12" Column="4" />
+      <File FileName="Vj/WeatherForecast.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Vj" expanded="True">
+            <Node name="Vj" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
